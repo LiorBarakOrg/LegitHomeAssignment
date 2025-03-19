@@ -26,21 +26,17 @@ namespace LegitHomeTask.Controllers
             _suspiciousBehaviorDetector = suspiciousBehaviorDetector;
         }
 
-        [HttpPost("event/send")]
-        // public IActionResult ReceiveWebhook([FromBody] MyModel model)
-        public async Task<IActionResult> ReceiveWebhook()
+        [HttpPost("github_event/receive")]
+        public async Task<IActionResult> ReceiveGithubEventWebhook()
         {
             // Get the event's type from the header of the given github event
             var eventType = Request.Headers["X-GitHub-Event"].ToString() ?? "";
-            Console.WriteLine($"eventType: {eventType}");
 
             // Read the body of the request
             var reader = new StreamReader(Request.Body);
-            // Console.WriteLine($"reader: {reader}");
 
             // Read the body of the request
             var body = await reader.ReadToEndAsync();
-            // Console.WriteLine($"body: {body}");
 
             if (body == null || body.Length == 0 || string.IsNullOrWhiteSpace(body))
             {
@@ -64,12 +60,7 @@ namespace LegitHomeTask.Controllers
                 var root = jsonDoc.RootElement;
                 Console.WriteLine($"root: {root}");
 
-                // // Deserialize the event into a specific model and process it
-                // var model = JsonConvert.DeserializeObject<MyModel>(body);
-
                 _suspiciousBehaviorDetector.ProcessEvent(root, eventType);
-                // Call the specific handler for the event
-                // githubEvent.HandleEvent();
 
                 return Ok("Webhook processed successfully");
             }
