@@ -1,3 +1,0 @@
-# LegitHomeAssignment
-
-test
