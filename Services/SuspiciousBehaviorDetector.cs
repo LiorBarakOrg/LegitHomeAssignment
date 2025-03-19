@@ -23,12 +23,8 @@ namespace LegitHomeTask.Services
                         ?? throw new InvalidOperationException("Failed to deserialize CreateTeamEvent");
 
                 case "push":
-                    var pushCodeEvent = JsonSerializer.Deserialize<PushCodeEvent>(jsonRoot)
+                    return JsonSerializer.Deserialize<PushCodeEvent>(jsonRoot)
                         ?? throw new InvalidOperationException("Failed to deserialize PushCodeEvent");
-                    Console.WriteLine($"Push Code Event detected! {pushCodeEvent}");
-                    return pushCodeEvent;
-                // return JsonSerializer.Deserialize<PushCodeEvent>(jsonRoot.GetRawText())
-                //     ?? throw new InvalidOperationException("Failed to deserialize PushCodeEvent.");
 
                 case "repository":
                     return JsonSerializer.Deserialize<RepoCreateDeleteEvent>(jsonRoot)

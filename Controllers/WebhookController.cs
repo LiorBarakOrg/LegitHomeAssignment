@@ -44,21 +44,13 @@ namespace LegitHomeTask.Controllers
                 return BadRequest("Empty body received");
             }
 
-            // Get the signature from the header
-            // var signature = Request.Headers["X-Hub-Signature"].ToString() ?? "";
-            // Console.WriteLine($"signature: {signature}");
-            // if (!VerifySignature(body, signature))
-            // {
-            //     Console.WriteLine("☠️ Invalid webhook received!");
-            //     return Unauthorized("Invalid signature");
-            // }
+            // TODO: add authentication, authorization and valisation of the webhook
 
             try
             {
                 // Parse the JSON body
                 var jsonDoc = JsonDocument.Parse(body);
                 var root = jsonDoc.RootElement;
-                Console.WriteLine($"root: {root}");
 
                 _suspiciousBehaviorDetector.ProcessEvent(root, eventType);
 
@@ -69,23 +61,6 @@ namespace LegitHomeTask.Controllers
                 // Log the error and return a failed response
                 Console.WriteLine($"Error processing webhook: {ex.Message}");
                 return BadRequest("Invalid webhook event");
-            }
-        }
-
-        public bool VerifySignature(string payload, string receivedSignature)
-        {
-            var secret = _configuration["Webhook:Secret"];
-            if (string.IsNullOrEmpty(secret))
-            {
-                return false;
-            }
-
-            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
-            {
-                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(payload));
-                var computedSignature = "sha1=" + BitConverter.ToString(hash).Replace("-", "").ToLower();
-
-                return computedSignature == receivedSignature;
             }
         }
     }
