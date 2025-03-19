@@ -1,18 +1,55 @@
+using System.Text.Json.Serialization;
+using System;
+
 namespace LegitHomeTask.Models
 {
     public class PushCodeEvent : GitHubEvent
     {
-        public string RepositoryName { get; set; } = "";
-        public string CommitMessage { get; set; } = "";
+        [JsonPropertyName("commits")]
+        public List<Commit> Commits { get; set; } = new List<Commit>();
+
+        [JsonPropertyName("repository")]
+        public PushRepository PushRepository { get; set; } = new PushRepository();
 
         public override bool HandleEvent()
         {
-            // if (pushCodeEvent.Timestamp.Hour >= 14 && pushCodeEvent.Timestamp.Hour <= 16)
-            // {
-            //     Console.WriteLine($"Detected suspicious behavior: 'Pushing code event between 14:00-16:00'...{pushCodeEvent.CommitMessage}");
-            // }
-            Console.WriteLine($"Push Code Event: {RepositoryName} - {CommitMessage}");
-            return false;
+            // Get the latest commit (the last one in the list)
+            var latestCommit = Commits.LastOrDefault();
+            if (latestCommit == null)
+            {
+                Console.WriteLine("No commits found");
+                return false;
+            }
+
+            // Parse the timestamp of the latest commit
+            DateTime commitTimestamp = latestCommit.Timestamp;
+
+            // Check if the commit timestamp is between 14:00 (2 PM) and 16:00 (4 PM)
+            if (commitTimestamp.Hour >= 14 && commitTimestamp.Hour <= 16)
+            {
+                Console.WriteLine($"Suspicious Push Code Event Detected: {PushRepository.Name} - {latestCommit.Message}");
+                return true;
+            }
+            else
+            {
+                // Console.WriteLine("The commit time is not between 14:00 and 16:00");
+                return false;
+            }
         }
+    }
+
+    public class Commit
+    {
+        [JsonPropertyName("message")]
+        public string Message { get; set; } = "";
+
+        [JsonPropertyName("timestamp")]
+        public DateTime Timestamp { get; set; }
+    }
+
+    public class PushRepository
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = "";
     }
 }
