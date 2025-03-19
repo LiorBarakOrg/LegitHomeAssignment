@@ -1963,11 +1963,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment.csproj",
+      "projectUniqueName": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment/LegitHomeAssignment.csproj",
       "projectName": "LegitHomeAssignment",
-      "projectPath": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment.csproj",
+      "projectPath": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment/LegitHomeAssignment.csproj",
       "packagesPath": "/Users/liorbarak/.nuget/packages/",
-      "outputPath": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/obj/",
+      "outputPath": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/liorbarak/.nuget/NuGet/NuGet.Config"

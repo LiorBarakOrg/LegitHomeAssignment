@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2u94nr/m5Uw=",
+  "dgSpecHash": "qtCKh9AxgnE=",
   "success": true,
-  "projectFilePath": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment.csproj",
+  "projectFilePath": "/Users/liorbarak/Documents/study/Legit/LegitHomeAssignment/LegitHomeAssignment/LegitHomeAssignment.csproj",
   "expectedPackageFiles": [
     "/Users/liorbarak/.nuget/packages/confluent.kafka/2.8.0/confluent.kafka.2.8.0.nupkg.sha512",
     "/Users/liorbarak/.nuget/packages/librdkafka.redist/2.8.0/librdkafka.redist.2.8.0.nupkg.sha512",
