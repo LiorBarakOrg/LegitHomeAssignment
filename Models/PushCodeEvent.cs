@@ -25,7 +25,7 @@ namespace LegitHomeTask.Models
             DateTime commitTimestamp = latestCommit.Timestamp;
 
             // Check if the commit timestamp is between 14:00 (2 PM) and 16:00 (4 PM)
-            if (commitTimestamp.Hour >= 12 && commitTimestamp.Hour <= 16)
+            if (commitTimestamp.Hour >= 14 && commitTimestamp.Hour <= 16)
             {
                 Console.WriteLine($"Suspicious Push Code Event Detected: {PushRepository.Name} - {latestCommit.Message}");
                 return true;
